@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Persistent Sheaf Laplacians at the Edge</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body class="bg-gray-50 text-gray-800 font-sans antialiased">
+
+    <header class="bg-blue-900 text-white py-12">
+        <div class="max-w-5xl mx-auto px-6">
+            <h1 class="text-3xl md:text-4xl font-bold mb-4">Memory-Optimized Persistent Sheaf Laplacians for Real-Time Biomedical Signal Anomaly Detection on Resource-Scarce Platforms</h1>
+            <p class="text-xl text-blue-200">CECIIS 2026 • Interactive Hardware Profiling Demo</p>
+        </div>
+    </header>
+
+    <main class="max-w-5xl mx-auto px-6 py-10">
+        
+        <section class="mb-12 bg-white p-8 rounded-lg shadow-sm border border-gray-100">
+            <h2 class="text-2xl font-semibold mb-4 border-b pb-2">Abstract & Contributions</h2>
+            <p class="mb-4 text-gray-600 leading-relaxed">
+                Raw-data streaming in edge-intelligence systems faces a severe computational trilemma involving precision, latency, and energy consumption. This project proposes a hardware-software co-design framework utilizing Persistent Sheaf Laplacians to shift the paradigm from raw data transmission to highly localized, geometry-aware feature extraction on microcontrollers.
+            </p>
+            <ul class="list-disc pl-6 text-gray-600 space-y-2">
+                <li><strong class="text-gray-800">Algorithmic Compression:</strong> 1D symmetric distance matrix flattening reduces topological graph construction memory by 50%.</li>
+                <li><strong class="text-gray-800">Computational Acceleration:</strong> Early-Terminated Union-Find algorithm halts reduction early, achieving sub-8ms latencies.</li>
+                <li><strong class="text-gray-800">Clinical Validation:</strong> Tested on MIT-BIH and PPG-DaLiA datasets, isolating physiological anomalies from motion artifacts.</li>
+            </ul>
+        </section>
+
+        <section class="mb-12">
+            <h2 class="text-2xl font-semibold mb-6">Methodology Pipeline</h2>
+            <div class="flex flex-col md:flex-row items-center justify-between gap-4 bg-white p-6 rounded-lg shadow-sm border border-gray-100 text-center text-sm font-medium">
+                <div class="bg-green-100 text-green-800 p-4 rounded shadow-sm w-full">1. Raw Signal Stream<br>(ECG/PPG)</div>
+                <div class="text-gray-400">➔</div>
+                <div class="bg-gray-100 p-4 rounded shadow-sm w-full">2. Windowing<br>(N=32, 64, 128)</div>
+                <div class="text-gray-400">➔</div>
+                <div class="bg-gray-100 p-4 rounded shadow-sm w-full">3. 1D Matrix Compression<br>(-50% SRAM)</div>
+                <div class="text-gray-400">➔</div>
+                <div class="bg-gray-100 p-4 rounded shadow-sm w-full">4. Early-Terminated<br>Union-Find</div>
+                <div class="text-gray-400">➔</div>
+                <div class="bg-blue-100 text-blue-800 p-4 rounded shadow-sm w-full">5. Persistent Sheaf<br>Laplacian</div>
+            </div>
+        </section>
+
+        <section class="mb-12">
+            <h2 class="text-2xl font-semibold mb-6">Interactive Hardware Profiling Dashboard</h2>
+            <p class="text-gray-600 mb-6">Explore the execution metrics captured during simulated bare-metal physical profiling on a 32-bit ARM Cortex-M architecture.</p>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                
+                <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
+                    <h3 class="text-lg font-semibold mb-4 text-center">SRAM Memory Footprint (KB)</h3>
+                    <canvas id="memoryChart"></canvas>
+                    <p class="text-xs text-gray-500 mt-4 text-center">Quadratic scaling of the 1D compressed matrix remains under the 32 KB threshold.</p>
+                </div>
+
+                <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
+                    <h3 class="text-lg font-semibold mb-4 text-center">Execution Latency (ms)</h3>
+                    <canvas id="latencyChart"></canvas>
+                    <p class="text-xs text-gray-500 mt-4 text-center">Note the cold-start processor anomaly at N=32. Optimal sub-6ms achieved thereafter.</p>
+                </div>
+
+            </div>
+        </section>
+
+        <section class="mb-12 bg-white p-8 rounded-lg shadow-sm border border-gray-100">
+            <h2 class="text-2xl font-semibold mb-4 border-b pb-2">Tabular Results</h2>
+            <div class="overflow-x-auto">
+                <table class="w-full text-left border-collapse">
+                    <thead>
+                        <tr class="bg-gray-100 text-gray-700">
+                            <th class="p-3 border-b">Dataset</th>
+                            <th class="p-3 border-b">Window (N)</th>
+                            <th class="p-3 border-b">Time (ms)</th>
+                            <th class="p-3 border-b">SRAM (KB)</th>
+                        </tr>
+                    </thead>
+                    <tbody class="text-gray-600">
+                        <tr class="border-b"><td class="p-3">MIT-BIH</td><td class="p-3">32</td><td class="p-3">7.89</td><td class="p-3">1.94</td></tr>
+                        <tr class="border-b bg-gray-50"><td class="p-3">MIT-BIH</td><td class="p-3">64</td><td class="p-3">2.03</td><td class="p-3">7.88</td></tr>
+                        <tr class="border-b"><td class="p-3">MIT-BIH</td><td class="p-3">128</td><td class="p-3">5.06</td><td class="p-3">31.75</td></tr>
+                        <tr class="bg-blue-50"><td class="p-3 font-semibold text-blue-800">PPG-DaLiA</td><td class="p-3 font-semibold text-blue-800">64</td><td class="p-3 font-semibold text-blue-800">2.29</td><td class="p-3 font-semibold text-blue-800">7.88</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        // Memory Chart
+        const ctxMem = document.getElementById('memoryChart').getContext('2d');
+        new Chart(ctxMem, {
+            type: 'line',
+            data: {
+                labels: ['N=32', 'N=64', 'N=128'],
+                datasets: [
+                    {
+                        label: 'SRAM Usage (KB)',
+                        data: [1.94, 7.88, 31.75],
+                        borderColor: 'rgb(59, 130, 246)',
+                        backgroundColor: 'rgba(59, 130, 246, 0.1)',
+                        borderWidth: 3,
+                        pointRadius: 6,
+                        fill: true,
+                        tension: 0.3
+                    },
+                    {
+                        label: 'MCU Limit (32 KB)',
+                        data: [32, 32, 32],
+                        borderColor: 'rgb(239, 68, 68)',
+                        borderWidth: 2,
+                        borderDash: [5, 5],
+                        pointRadius: 0,
+                        fill: false
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                scales: { y: { beginAtZero: true, max: 40 } }
+            }
+        });
+
+        // Latency Chart
+        const ctxLat = document.getElementById('latencyChart').getContext('2d');
+        new Chart(ctxLat, {
+            type: 'bar',
+            data: {
+                labels: ['N=32 (MIT)', 'N=64 (MIT)', 'N=64 (PPG)', 'N=128 (MIT)'],
+                datasets: [{
+                    label: 'Execution Time (ms)',
+                    data: [7.89, 2.03, 2.29, 5.06],
+                    backgroundColor: [
+                        'rgba(249, 115, 22, 0.8)', // Orange for anomaly
+                        'rgba(34, 197, 94, 0.8)',  // Green for optimal
+                        'rgba(59, 130, 246, 0.8)', // Blue for PPG
+                        'rgba(34, 197, 94, 0.8)'   // Green for optimal
+                    ],
+                    borderRadius: 4
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: { y: { beginAtZero: true, max: 10 } }
+            }
+        });
+    </script>
+</body>
+</html>
